@@ -1,0 +1,59 @@
+First, I defined two structures: matrixEntry, which contains the number of
+rows, the number of columns, and a pointer to the matrix; and matrixStorage,
+which includes the position in the matrix vector, the size of the allocated
+vector, and the vector itself. After declaring a variable of type
+matrixStorage, it was initialized in the init function.
+
+Each command is handled in a switch case. For the letter 'L', it first checks
+if the storage needs to be enlarged. Reading is then performed in a function
+(read_matrix_into_entry) that dynamically allocates a matrix and adds it to the
+matrix vector. For the letter 'D', it uses a function (matrix_in_storage) as
+the condition of the if statement, which checks if the given index belongs to
+a read matrix and displays its dimensions; otherwise, it displays an error
+message.
+
+For the letter 'P', displaying is done through the show_matrix function using
+matrix_in_storage as the condition for the if statement. For the letter 'C',
+the same condition is used for the if statement, and the resize function
+constructs a new matrix at a new address, deletes the initial matrix, and
+replaces the old address with the new matrix's address.
+
+For the letter 'M', it uses the same condition for the if statement
+(matrix_in_storage), but this time called twice for both matrices.
+Multiplication is done in a function (multiply_matrix) that takes three
+parameters: the indices of the two matrices and the index of the new matrix
+formed.
+
+For the letter 'C', if the matrix is in storage, only the rows and columns that
+are specified will be kept from the matrix and stored in a new one. After that,
+the old matrix is freed, and the new one takes its place.
+
+For the letter 'O', the sort_storage function is called, where the matrix
+vector is sorted by constructing another vector that stores the sum of all
+elements modulo 10007.
+
+For the letter 'T', the transpose is created in the transpose_matrix function
+in another matrix whose address replaces the old one.
+
+For the letter 'R', the index and power are read, and the recursive power
+function is called only if all three conditions are met. For the letter 'F',
+the matrix with the respective index is deallocated, and the storage is
+reconstructed.
+
+For the letter 'F', the index is read, and if it is in storage, the memory for
+that matrix is freed, and all the matrices after that index are moved one
+position to the left.
+
+For the letter 'S', if all conditions are met, then the recursive Strassen
+algorithm starts. The two matrices are split into four, and then seven matrices
+are calculated by calling the function strassen again for each of them. The
+function reaches a return for the first time when the matrix can not be split
+anymore. The function returns the result of the multiplication of the two
+matrices.
+
+Finally, for the letter 'Q', each matrix is deallocated one by one, and then
+the entire storage is deallocated.
+
+There are four more case statements to ensure that the default case is not
+entered when it is not appropriate. The default of the switch is called when
+the program receives a character that does not represent an operation.
